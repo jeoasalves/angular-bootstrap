@@ -1,5 +1,7 @@
 # Angularmongodb
 
+This project consume my other projet [SPRING_BOOT_MONGODB](https://github.com/jeoasalves/spring_boot_mongodb).
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.6.
 
 ## Development server
