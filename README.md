@@ -1,6 +1,6 @@
-# Angularmongodb
+# Angular with Bootstrap
 
-This project consume my other projet [SPRING_BOOT_MONGODB](https://github.com/jeoasalves/spring_boot_mongodb).
+This project call Rest Api, implemented in my other project: [SPRING_BOOT_MONGODB](https://github.com/jeoasalves/spring_boot_mongodb).
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.6.
 
