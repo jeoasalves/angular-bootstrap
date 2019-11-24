@@ -1,0 +1,18 @@
+-  request:
+      method: POST
+      url: /helloII
+      post: "{\"codigoPedido\":\"2020\",\"situacao\":\"SENT_TO_SELLER\",\"credenciamento\":{\"codigo\":\"2020\"}}"
+
+   response:
+      status: 200
+      latency: 3000
+      body: "{\"codigo\":2020}"
+      # body: >
+      #   multiple line response
+      #   another line
+      #strategy: random
+      #file: response.txt
+      files: ["response.txt", {"name":"fault.txt","status":500}]
+      headers:
+            custom: hello
+      #contentType: application/xml

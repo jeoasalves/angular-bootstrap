@@ -1,17 +1,18 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { PedidoModule } from './pedido/pedido.module';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule
+    PedidoModule,
+    HomeModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

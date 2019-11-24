@@ -2,31 +2,44 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
-import { Pedido } from './Pedido';
+import { Pedido } from './pedido';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PedidoService {
-  public endpoint : any = 'http://localhost:8080/pedidos/';
+  public endpoint : any = 'http://localhost:4200/api/pedidos/';
+
   constructor(private http: HttpClient) { }
 
-  cadastrarPedido(pedido: Pedido) {
+  cadastrarPedido(pedido: Pedido) : Observable<any> {
     let jsonPedido: String = JSON.stringify(pedido);
-    console.log(jsonPedido);
+    
+    console.log('Body: ' + jsonPedido);
 
+    let bearer = btoa("admin:password");
+  
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache'
+        'Cache-Control': 'no-cache',
+        'Authorization': 'Basic ' + bearer
       })
-    };
+    }; 
 
+    console.log('Content-Type: ' + httpOptions.headers.getAll('Content-Type'));
+    console.log('Cache-Control: ' + httpOptions.headers.getAll('Cache-Control'));
+    console.log('Authorization: ' + httpOptions.headers.getAll('Authorization'));
+
+    return this.http.post<Pedido>(this.endpoint, jsonPedido, httpOptions);
+
+    /*
     this.http.post<Pedido>(this.endpoint, jsonPedido, httpOptions)
-      .pipe(
-        tap((pedido) => console.log(`Pedido foi criado w/ id=${pedido.id}`)),
-        catchError(this.handleError<any>('cadastrarPedido'))
-      ).subscribe();
+    .pipe(
+      tap((pedido) => console.log(pedido)),
+      catchError(this.handleError<any>('cadastrarPedido'))
+    ).subscribe();*/
+
   }
 
   getPedidos(): Observable<any> {

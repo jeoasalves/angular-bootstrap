@@ -1,0 +1,10 @@
+POST http://localhost:9090/helloII HTTP/1.1
+content-Type: application/json
+
+{"codigoPedido":"2020","situacao":"SENT_TO_SELLER","credenciamento":{"codigo":"2020"}}
+
+
+###
+
+http://localhost:3000/posts
+
