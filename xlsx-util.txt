@@ -1,0 +1,47 @@
+public static void main(String[] args) {
+		SpringApplication.run(ReprocessamentoApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet("pedidos");
+		
+		RelatorioReprocessamento rel1 = new RelatorioReprocessamento("5445456", "SENT_TO_SELLER");
+		RelatorioReprocessamento rel2 = new RelatorioReprocessamento("9879777", "WAITING_BILLING");
+		RelatorioReprocessamento rel3 = new RelatorioReprocessamento("7656565", "ERROR_VALIDATION_SELLER");
+		RelatorioReprocessamento rel4 = new RelatorioReprocessamento("25454545", "ERROR_INTEGRATION_SELLER");
+
+		List<RelatorioReprocessamento> lista = Arrays.asList(rel1, rel2, rel3, rel4);
+
+		int contadorLinha = 0;
+		
+		criarCabecalho(sheet, contadorLinha++);
+
+		for (RelatorioReprocessamento relatorio : lista) {
+			Row linha = sheet.createRow(contadorLinha++);
+			
+			int contadorColuna = 0;
+			
+			linha.createCell(contadorColuna++).setCellValue(relatorio.getCodigoPedido());
+			linha.createCell(contadorColuna++).setCellValue(relatorio.getSituacao());
+		}
+
+		try {
+			FileOutputStream outputStream = new FileOutputStream("dia-31122019.xlsx");
+			workbook.write(outputStream);
+			workbook.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void criarCabecalho(XSSFSheet sheet, int contadorLinha) {
+		Row linha = sheet.createRow(contadorLinha);
+		int contador = 0;
+		
+		linha.createCell(contador++).setCellValue("CODIGO_PEDIDO");
+		linha.createCell(contador++).setCellValue("SITUACAO");
+	}
